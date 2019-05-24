@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Ponto Online</title>
+</head>
+<body>
+    <ul class="nav bg-dark">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <P class="nav-link text-light">Olá, {{user.username}}</P>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout">Sair</a>
+            </li>
+            {%else%}<li class="nav-item">
+                <a class="nav-link" href="login">Login</a>
+            </li>
+            {% endif %}
+        <li class="nav-item">
+            <a class="nav-link active" href="ponto">BaterPonto</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="admin">Admin</a>
+        </li>
+    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Funcionario</th>
+              <th scope="col">entrada</th>
+              <th scope="col">entrada2</th>
+              <th scope="col">Saida1</th>
+              <th scope="col">Saida2</th>
+              <th scope="col">status</th>
+            </tr>
+        </thead>
+    {% for i in object_list %}
+        <tbody>
+          <tr>
+            <td>{{ i.funcionario }}</td>
+            <td>{{ i.entrada1 }}</td>
+            <td>{{ i.entrada2 }}</td>
+            <td>{{ i.saida1 }}</td>
+            <td>{{ i.saida2 }}</td>
+            {% if i.status == True %}
+            <td>Consistente</td>
+            {% endif %}
+            {% if i.status == False %}
+            <td>Inconsistente</td>
+            {% endif %}
+            
+          </tr>
+        </tbody>
+    {% endfor %}
+
+</table>
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<!--
+    {% for i in object_list %}
+    <p>E: {{ i.entrada }}</p>
+    <p>S: {{ i.saida }}</p>
+    {% endfor %}
+-->
